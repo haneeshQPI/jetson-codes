@@ -1,6 +1,6 @@
 # Jetson Nano Inference Toolkit
 
-This repository provides scripts for running **object detection** and **semantic segmentation** inference using ONNX models on the NVIDIA Jetson Nano. The code is optimized for Jetson's hardware constraints and supports both live streams and batch processing.
+This repository provides scripts for running **object detection** inference using ONNX models on the NVIDIA Jetson Nano. The code is optimized for Jetson's hardware constraints and supports both live streams and batch processing.
 
 ## Features
 
@@ -67,33 +67,24 @@ You will be prompted to choose a mode:
 - The class names for your model (edit the `class_names` list in the script).
 - Input/output file or folder paths as prompted.
 
-### 2. Semantic Segmentation
 
-Run the segmentation script:
-
-```bash
-python segmentation.py
-```
-
-You will be prompted to choose a mode:
-
-- `image`: Run segmentation on a single image.
-- `video`: Run segmentation on a video file.
-
-**You will need to provide:**
-- The path to your ONNX segmentation model (edit `model_path` in the script).
-- The class names for your model (edit the `class_names` list in the script).
-- Input/output file paths as prompted.
-
----
+**Templete**
+ - This is the command-line templete
+ ```bash
+   python3 objectdetection.py --mode ['image', 'folder', 'video', 'live'] --source ['0','1','2',...] --model-path [model path to your onnx model file] --classes [your classes with a space] --batch-size [1,2,3,4] --input-size [widthxheight] --score-threshold [0-1]
+ ```
+ - This is the example code
+ ```bash
+    python3 objectdetection.py --mode live --source 0 --model-path /home/jetson/Jetson_codes/models/rtmtinyface.onnx --classes faces --batch-size 1 --input-size 640 640 --score-threshold 0.6
+ ``` 
 
 ## Model Preparation
 
 - This toolkit does **not** include any ONNX models. You must export or download your own models compatible with ONNX Runtime.
 - For best results, use models with input shapes and normalization compatible with the preprocessing in the scripts.
-- Example model path for segmentation (edit as needed in `segmentation.py`):
+- Example model path for objectdetecion (edit as needed in `objectdection.py`):
   ```
-  model_path = '/home/jetson/Downloads/InferenceCodes/models/deeplabkitty.onnx'
+  model_path = '/home/jetson/Downloads/InferenceCodes/models/rtmtinyface.onnx'
   ```
 
 ---
@@ -106,19 +97,3 @@ You will be prompted to choose a mode:
 - **Interactive Mode**: In object detection, you can step through images and save results manually or process all automatically.
 
 ---
-
-## Troubleshooting
-
-- If you encounter errors loading the ONNX model, ensure the model is compatible with ONNX Runtime and Jetson Nano.
-- If you see errors about missing dependencies, double-check your Python version and the installed packages.
-- For issues with the ONNX Runtime wheel, download the correct version for your Jetson Nano and Python version from the [official ONNX Runtime releases](https://github.com/microsoft/onnxruntime/releases).
-
----
-
-## License
-
-This project is provided as-is for research and educational purposes.
-
----
-
-**Feel free to modify the scripts and README to fit your specific models and use cases!** 
