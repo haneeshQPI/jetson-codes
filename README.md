@@ -58,9 +58,8 @@ You will be prompted to choose a mode:
 
 - `image`: Run detection on a single image.
 - `video`: Run detection on a video file.
-- `live`: Run detection on a webcam or network stream (RTSP/HTTP).
+- `live`: Run detection on a webcam.
 - `folder`: Batch process all images in a folder.
-- `interactive`: Step through images in a folder with preview and manual save.
 
 **You will need to provide:**
 - The path to your ONNX detection model.
